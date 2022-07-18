@@ -1,0 +1,92 @@
+#Project No 1 
+#ATM Machine
+
+import datetime 
+now=datetime.datetime.now()
+date=now.strftime("%d %b %Y")
+time=now.strftime("%H:%M:%S")
+print("Date -",date)
+print("Time -",time)
+
+class ATM:
+    Balance=10000
+    w=0
+    np=0
+    def __init__(self):
+        print('''
+           Welcome to Any ATM''')
+        print('''
+           Please Enter Your Pin to Proceed
+           ''')
+    def Pin(self):
+        Attempt=0
+        while True:
+            self.p=int(input('''
+            4 Digit Pin : '''))
+            if self.p==3460 or self.p==self.np:
+                print('''
+            You can Proceed
+                ''')
+                break
+            else:
+                print("Invalid Pin","Please Contact Bank Branch")
+               
+    def Choices(self):
+        self.b=self.Balance
+        self.c=input('''
+        Please Choose Your Option
+        *************************
+         1.Cash Withdrawl          
+         2.Balance Enquiry         
+         3.Pin Change              
+         4.Exit
+         
+        -> ''')
+        if self.p==3460 or self.p==self.np:
+            print('''
+        You selected option''',self.c)
+        while True:  
+            if self.c=="1":
+                self.b=self.Balance
+                self.w=int(input('''
+                Please Enter the Amount : '''))
+                if self.w>=10000:
+                    print("INSUFFIECIENT BALANCE")
+                if self.w<=10000:
+                    print("₹",self.w,"has been withdrawned")
+                a=input("Do you want to proceed (y/n) ").lower()
+                if a=="y":
+                    print('You chooose the option Yes')
+                    return self.Choices()
+                elif a=="n":
+                    print('Thank you for banking with us')
+                    break
+            
+            elif self.c=="2":
+                    print("₹",self.b-self.w,"is remaining in your account")
+                    b=input("Do you want to proceed (y/n) ").lower()
+                    if b=="y":
+                        print('You chooose the option Yes')
+                        return self.Choices()
+                    elif b=="n":
+                        print('Thank you for banking with us')
+                        break
+                    
+            elif self.c=="3":
+                self.np=int(input("Please enter new PIN "))
+                print("New PIN is set to ",self.np)
+                self.Pin()
+                self.Choices()
+                
+            elif self.c=="4":
+                print('''
+                  Thank you for banking with us''')
+                break
+                
+            elif self.c>="5":
+                print("please Select Proper Option")
+                self.Choices()
+
+this=ATM()
+this.Pin()
+this.Choices()
