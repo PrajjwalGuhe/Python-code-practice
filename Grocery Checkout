@@ -1,0 +1,87 @@
+#Grocery Self Checkout
+
+import datetime 
+now=datetime.datetime.now()
+date=now.strftime("%d %b %Y")
+time=now.strftime("%H:%M:%S")
+print("Date -",date)
+print("Time -",time)
+
+class Mainmenu:
+    def __init__(self):
+
+        print('''
+        -----------------Welcome to |SMART SHOP| -----------------
+        ''')
+        print('''
+        > This is a Self Checkout Machine, Please Select Products <''')
+class Category(Mainmenu):
+    def Categories(self):
+        ch=input('''
+                    Please Choose your Category
+                ************************************
+                   Press 1 For 'Dairy & Bakery'
+                   Press 2 For 'Staples'
+                   Press 3 For 'Personal Care'
+                   Press 4 For 'Snacks & Foods'
+                   press 5 For 'Fruits & vegetables'
+
+       --> ''')
+        if ch=="1":
+            print('''
+                You have selected Dairy & Bakery
+            ''')
+class Billing(Category):
+    def Bill(self):
+        cost=[]
+        products=[]
+        Dairyitems={'Butter (100gm)':{'code':101,'Price': 50},
+                    'Milk (1 litre)':{'code':102,'Price': 48},
+                    'Cheese (200gm)':{'code':103,'Price': 108},
+                    'Rusk (182gm)':{'code':104,'Price': 29},} 
+
+        code=int(input('''
+        Enter code mention on product : '''))
+               
+        for key in Dairyitems:
+            if int(code) == Dairyitems[key]['code']:
+                qty=int(input('''
+        Enter Quantity of the Product : '''))
+                print('')               
+                print(key,'₹',Dairyitems[key]['Price'],"x",qty,"= ₹",Dairyitems[key]['Price']*qty)
+                break
+                
+        for key in Dairyitems:
+                cost.append(Dairyitems[key]['Price']*qty)
+                products.append(key)
+                            
+        Continue=input('''
+            Press 'N' for next product
+            Press 'C' for next category
+            Press 'X' to Exit
+            --> ''')
+        if Continue in ["N","n"]:
+            self.Bill()
+        elif Continue in ["C","c"]:
+            self.Products_List()
+            self.Bill()
+        elif Continue in ["X","x"]:
+                print('''
+                Printing you Bill.....
+                
+                ''')
+                print('''
+                Items you have purchased are :
+                ''')
+                print(*products, sep="\n")
+                Sum = sum(cost)
+                print('''
+                Total Amount : ''',"₹",Sum)
+                print ('''
+                _______________ Thank You, Please Visit Again _______________
+                ''')
+                        
+                                           
+this=Billing()
+this.Categories()
+this.Bill()
